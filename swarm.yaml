@@ -1,0 +1,22 @@
+version: '3.8'
+services:
+  nginx:
+    image: nginx:latest
+    networks:
+      - web_network
+    deploy:
+      mode: replicated
+      replicas: 1
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 128M
+        reservations:
+          cpus: '0.25'
+          memory: 64Mi
+    ports:
+      - '5555:80'
+
+networks:
+  web_network:
+    driver: overlay
